@@ -4,10 +4,6 @@ import matplotlib.pyplot as plt
 from engine import estimate_position, simulate_time_of_arival, compute_time_difference_of_arival
 from visualization import plot_scenario, plot_hyperbolas, compute_bounds
 
-# Equilateral triangle with reference station at center
-radius = 4000.0
-center_x, center_y = 0.0, 0.0
-
 stations = np.array([
     [0.0,    0.0,    0.0],   # S0 – referenční stanice
     [4000.0, 0.0,    0.0],   # S1
