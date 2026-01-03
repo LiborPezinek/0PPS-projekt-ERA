@@ -9,10 +9,10 @@ radius = 4000.0
 center_x, center_y = 0.0, 0.0
 
 stations = np.array([
-    [center_x, center_y, 0.0],   # S0 – referenční stanice (center)
-    [center_x + radius * np.cos(np.radians(90)), center_y + radius * np.sin(np.radians(90)), 0.0],   # S1 at 90°
-    [center_x + radius * np.cos(np.radians(210)), center_y + radius * np.sin(np.radians(210)), 0.0],   # S2 at 210°
-    [center_x + radius * np.cos(np.radians(330)), center_y + radius * np.sin(np.radians(330)), 0.0],   # S3 at 330°
+    [0.0,    0.0,    0.0],   # S0 – referenční stanice
+    [4000.0, 0.0,    0.0],   # S1
+    [0.0,    4000.0, 0.0],   # S2
+    [4000.0, 4000.0, 0.0],   # S3
 ])
 
 target = np.array([
