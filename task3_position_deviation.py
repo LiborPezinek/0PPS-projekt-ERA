@@ -52,27 +52,31 @@ x0 = np.array([0, 0, 0])
 # Experiment: Vliv chyby v poloze jednotlivých přijímacích stanic na chybu odhadu polohy vysílače
 stationErrors = np.linspace(0, 500, 50)  # from 0 to 500 meters
 
-estimateErrors = [[], [], []]  # for each station
+estimateErrors = [[[],[],[]], [[],[],[]], [[],[],[]]]  # for each station and axis
 for error in stationErrors:
     stationsTest = stationsFake.copy()
-    for i in range(1, stationsTest.shape[0]):  # stations S1, S2, S3
-        stationsTest[i, 1] += error  # introduce error in Y coordinate
+    for j in range(0, 3):  # axes x,y,z
+        for i in range(1, stationsTest.shape[0]):  # stations S1, S2, S3
+            stationsTest[i, j] += error  # introduce error in specified coordinate axis
 
-        tdoaTest = compute_time_difference_of_arival(simulate_time_of_arival(stationsTest, target, sigma=1e-9))
+            tdoaTest = compute_time_difference_of_arival(simulate_time_of_arival(stationsTest, target, sigma=1e-9))
 
-        estimate = estimate_position(stationsFake, tdoaTest, x0)
-        estimateError = np.linalg.norm(np.abs(estimate - target))
-        estimateErrors[i-1].append(estimateError)
+            estimate = estimate_position(stationsFake, tdoaTest, x0)
+            estimateError = np.linalg.norm(np.abs(estimate - target))
+            estimateErrors[i-1][j].append(estimateError)
+    
 
 # Create plots for each station's position error impact
-fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+fig, axes = plt.subplots(3, 3, figsize=(15, 4))
     
-for i, ax in enumerate(axes):
-    ax.set_title(f"Station {i+1} Position Error Impact")
-    ax.set_xlabel("Station Position Error (m)")
-    ax.set_ylabel("Estimate Error (m)")
-    ax.grid(True)
-    ax.plot(stationErrors, estimateErrors[i], label=f'Station {i+1} Error', color='C'+str(i))
+for i in range(axes.shape[0]):
+    for j in range(axes.shape[1]):
+        ax = axes[i, j]
+        ax.set_title(f"Station {i+1}'s {['X', 'Y', 'Z'][j]}-axis Position Error Impact On Target Estimate Error")
+        ax.set_xlabel("Station Position Error (m)")
+        ax.set_ylabel("Estimate Error (m)")
+        ax.grid(True)
+        ax.plot(stationErrors, estimateErrors[i][j], label=f'Station {i+1} Error', color='C'+str(i))
 
 
 plt.tight_layout()
