@@ -15,7 +15,7 @@ target = np.array([
     2200.0, 5500.0, 1000.0
 ])
 
-x0 = np.array([0, 0, target[2]])
+x0 = np.array([0, 0, 0])
 
 toa = simulate_time_of_arival(stations, target, sigma=1e-9)
 tdoa = compute_time_difference_of_arival(toa)
@@ -26,5 +26,5 @@ xmin, xmax, ymin, ymax = compute_bounds(
         stations, target, estimate
     )
 plot_scenario(stations, target, estimate)
-plot_hyperbolas(stations, tdoa, z_plane=target[2], xlim=(xmin, xmax), ylim=(ymin, ymax))
+plot_hyperbolas(stations, tdoa, z_plane=estimate[2], xlim=(xmin, xmax), ylim=(ymin, ymax))
 plt.show(block=True)

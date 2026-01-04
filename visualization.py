@@ -80,7 +80,7 @@ def plot_hyperbolas(
 def plot_scenario(stations, target=None, estimate=None):
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(7, 7))
+    _, ax = plt.subplots(figsize=(7, 7))
 
     ax.scatter(stations[:, 0], stations[:, 1],
                marker='^', s=120, label='Stations')
@@ -113,4 +113,17 @@ def plot_scenario(stations, target=None, estimate=None):
     ax.set_xlabel("x [m]")
     ax.set_ylabel("y [m]")
     ax.legend()
+    
+    # Add textbox with coordinates at bottom
+    coord_text = []
+    if target is not None:
+        coord_text.append(f"Target: ({target[0]:.1f}, {target[1]:.1f}, {target[2]:.1f})")
+    if estimate is not None:
+        coord_text.append(f"Estimate: ({estimate[0]:.1f}, {estimate[1]:.1f}, {estimate[2]:.1f})")
+    
+    if coord_text:
+        textstr = "  |  ".join(coord_text)
+        props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+        ax.text(0.5, -0.115, textstr, transform=ax.transAxes, fontsize=9,
+                verticalalignment='bottom', horizontalalignment='center', bbox=props)
 
