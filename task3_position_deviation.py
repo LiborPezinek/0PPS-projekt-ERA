@@ -46,8 +46,6 @@ x0 = np.array([0, 0, 0])
 # plt.show(block=True)
 
 ###############################################
-# Nepřesně určená poloha přijímací stanice má výrazný vliv na odhadovanou polohu vysílače.
-# I při velmi malém šumu v měření TDOA (sigma=1e-9) vede chyba 200 m v poloze jedné ze stanic k chybě přes 1000 m v odhadu polohy vysílače.
 
 # Experiment: Vliv chyby v poloze jednotlivých přijímacích stanic na chybu odhadu polohy vysílače
 stationErrors = np.linspace(0, 500, 50)  # from 0 to 500 meters
