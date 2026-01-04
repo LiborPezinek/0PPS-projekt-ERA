@@ -80,7 +80,7 @@ def plot_hyperbolas(
 def plot_scenario(stations, target=None, estimate=None):
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(7, 7))
+    _, ax = plt.subplots(figsize=(7, 7))
 
     ax.scatter(stations[:, 0], stations[:, 1],
                marker='^', s=120, label='Stations')
